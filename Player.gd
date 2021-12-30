@@ -38,15 +38,46 @@ func _process(delta):
 	shoot()
 
 func update_crosshair_position():
-	if Input.is_action_just_pressed("CannonRaise"):
-		if $Node2D/TankHead.frame < 10:
-			$Node2D/TankHead/Sprite.position += Vector2(0, 10)
-			$Node2D/TankHead.frame += 1
+	$Node2D/TankHead/Sprite.global_position = get_global_mouse_position()
+	if $Node2D/TankHead/Sprite.position.y <= -162.634:
+		 $Node2D/TankHead/Sprite.position.y = -161.634
+	elif $Node2D/TankHead/Sprite.position.y >= -62.634:
+		$Node2D/TankHead/Sprite.position.y = -63.634
+		
+	if $Node2D/TankHead/Sprite.position.y >= -162.634 and $Node2D/TankHead/Sprite.position.y <= -152.634:
+		$Node2D/TankHead/Sprite.position.y = -162.634
+		$Node2D/TankHead.frame = 0
+	elif $Node2D/TankHead/Sprite.position.y >= -152.634 and $Node2D/TankHead/Sprite.position.y <= -142.634:
+		$Node2D/TankHead/Sprite.position.y = -152.634 
+		$Node2D/TankHead.frame = 1
+	elif $Node2D/TankHead/Sprite.position.y >= -142.634 and $Node2D/TankHead/Sprite.position.y <= -132.634:
+		$Node2D/TankHead/Sprite.position.y = -142.634
+		$Node2D/TankHead.frame = 2
+	elif $Node2D/TankHead/Sprite.position.y >= -132.634 and $Node2D/TankHead/Sprite.position.y <= -122.634: 
+		$Node2D/TankHead/Sprite.position.y = -132.634
+		$Node2D/TankHead.frame = 3
+	elif $Node2D/TankHead/Sprite.position.y >= -122.634 and $Node2D/TankHead/Sprite.position.y <= -112.634:
+		$Node2D/TankHead/Sprite.position.y = -122.634
+		$Node2D/TankHead.frame = 4
+	elif $Node2D/TankHead/Sprite.position.y >= -112.634 and $Node2D/TankHead/Sprite.position.y <= -102.634: 
+		$Node2D/TankHead/Sprite.position.y = -112.634
+		$Node2D/TankHead.frame = 5
+	elif $Node2D/TankHead/Sprite.position.y >= -102.634 and $Node2D/TankHead/Sprite.position.y <= -92.634:
+		$Node2D/TankHead/Sprite.position.y = -102.634
+		$Node2D/TankHead.frame = 6
+	elif $Node2D/TankHead/Sprite.position.y >= -92.634 and $Node2D/TankHead/Sprite.position.y <= -82.634: 
+		$Node2D/TankHead/Sprite.position.y = -92.634
+		$Node2D/TankHead.frame = 7
+	elif $Node2D/TankHead/Sprite.position.y >= -82.634 and $Node2D/TankHead/Sprite.position.y <= -72.634:
+		$Node2D/TankHead/Sprite.position.y = -82.634
+		$Node2D/TankHead.frame = 8
+	elif $Node2D/TankHead/Sprite.position.y >= -72.634 and $Node2D/TankHead/Sprite.position.y <= -64.634: 
+		$Node2D/TankHead/Sprite.position.y = -72.634
+		$Node2D/TankHead.frame = 9
+	else:
+		$Node2D/TankHead/Sprite.position.y = -63.634
+		$Node2D/TankHead.frame = 10
 
-	if Input.is_action_just_pressed("CannonLower"):
-		if $Node2D/TankHead.frame > 0:
-			$Node2D/TankHead/Sprite.position += Vector2(0, -10)
-			$Node2D/TankHead.frame -= 1
 
 func OnImpact():
 	$Camera2D.shake_amount = 12
@@ -63,27 +94,27 @@ func shoot():
 		get_tree().get_root().add_child(bullet_instance)
 		match $Node2D/TankHead.frame:
 			0:
-				bullet_instance.fire(20, 153)
+				bullet_instance.fire(18, 153)
 			1:
-				bullet_instance.fire(20, 142)
+				bullet_instance.fire(18, 142)
 			2:
-				bullet_instance.fire(20, 133)
+				bullet_instance.fire(18, 133)
 			3:
-				bullet_instance.fire(20, 122)
+				bullet_instance.fire(18, 122)
 			4:
-				bullet_instance.fire(20, 111)
+				bullet_instance.fire(18, 111)
 			5:
-				bullet_instance.fire(20, 101)
+				bullet_instance.fire(18, 101)
 			6:
-				bullet_instance.fire(20, 90)
+				bullet_instance.fire(18, 90)
 			7:
-				bullet_instance.fire(20, 79)
+				bullet_instance.fire(18, 79)
 			8:
-				bullet_instance.fire(20, 69)
+				bullet_instance.fire(18, 69)
 			9:
-				bullet_instance.fire(20, 58)
+				bullet_instance.fire(18, 58)
 			10:
-				bullet_instance.fire(20, 48)
+				bullet_instance.fire(18, 48)
 
 
 
