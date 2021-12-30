@@ -1,0 +1,140 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://TankBodyProper.png" type="Texture" id=2]
+[ext_resource path="res://TankHead_SpriteSheet_Blue_Test.png" type="Texture" id=3]
+[ext_resource path="res://100px-Crosshairs_Red.svg.png" type="Texture" id=4]
+[ext_resource path="res://TankFire.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=40]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 3 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 3 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 3 )
+region = Rect2( 256, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 3 )
+region = Rect2( 288, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 3 )
+region = Rect2( 320, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=27]
+animations = [ {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"loop": true,
+"name": "CannonRaise",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 18, 13 )
+
+[node name="Player" type="KinematicBody2D"]
+z_index = 1
+script = ExtResource( 1 )
+speed = 150.0
+
+[node name="TankBody" type="Sprite" parent="."]
+modulate = Color( 0.753906, 0.753906, 0.753906, 1 )
+rotation = 1.5708
+scale = Vector2( 1.28125, 1.34375 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Light2D" type="Sprite" parent="TankBody"]
+material = SubResource( 40 )
+position = Vector2( -0.780487, 9.67442 )
+z_index = -1
+texture = ExtResource( 5 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 0, -3 )
+scale = Vector2( 1.0625, 1.09375 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TankHead" type="AnimatedSprite" parent="Node2D"]
+modulate = Color( 0.75, 0.75, 0.75, 1 )
+position = Vector2( 0, 0.083045 )
+rotation = 1.5708
+frames = SubResource( 27 )
+animation = "CannonRaise"
+
+[node name="Muzzle" type="Position2D" parent="Node2D/TankHead"]
+position = Vector2( 0, -18.286 )
+rotation = -1.5708
+
+[node name="Sprite" type="Sprite" parent="Node2D/TankHead"]
+modulate = Color( 0.180392, 0, 0.360784, 1 )
+position = Vector2( 0, -162.634 )
+scale = Vector2( 0.226191, 0.226191 )
+z_index = 6
+texture = ExtResource( 4 )
+
+[node name="CrosshairPosition" type="Position2D" parent="Node2D/TankHead/Sprite"]
+scale = Vector2( 4.42105, 4.42105 )
+
+[node name="Light2D" type="Light2D" parent="Node2D"]
+visible = false
+position = Vector2( -12.0809, 2.13571 )
+rotation = 1.5708
+scale = Vector2( 1.21868, 1.57353 )
+z_index = -1
+texture = ExtResource( 5 )
+color = Color( 1, 0.423529, 0.423529, 1 )
+energy = 21.83
+mode = 2
+range_height = 526.1
+shadow_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 15 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -22, -21, -22, -16, -18, -13, -13, -13, -10, -16, 11, -16, 18, -13, 22, -15, 22, -21 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+visible = false
+rotation = -3.14159
+polygon = PoolVector2Array( -22, -21, -22, -16, -18, -13, -13, -13, -10, -16, 11, -16, 18, -13, 22, -15, 22, -21 )
