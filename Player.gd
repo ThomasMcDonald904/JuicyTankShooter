@@ -41,7 +41,7 @@ func update_crosshair_position():
 	if Input.is_action_just_pressed("CannonRaise"):
 		if $Node2D/TankHead.frame < 10:
 			$Node2D/TankHead/Sprite.position += Vector2(0, 10)
-			$Node2D/TankHead.frame += 4
+			$Node2D/TankHead.frame += 1
 
 	if Input.is_action_just_pressed("CannonLower"):
 		if $Node2D/TankHead.frame > 0:
