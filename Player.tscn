@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://TankBodyProper.png" type="Texture" id=2]
-[ext_resource path="res://TankHead_SpriteSheet_Blue_Test.png" type="Texture" id=3]
-[ext_resource path="res://100px-Crosshairs_Red.svg.png" type="Texture" id=4]
-[ext_resource path="res://TankFire.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/TankBodyProper.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/TankHead_SpriteSheet_Blue_Test.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/100px-Crosshairs_Red.svg.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/TankFire.png" type="Texture" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=40]
 blend_mode = 1

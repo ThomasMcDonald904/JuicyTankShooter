@@ -8,11 +8,21 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Health",
+"language": "GDScript",
+"path": "res://Scripts/Health.gd"
+} ]
+_global_script_class_icons={
+"Health": ""
+}
+
 [application]
 
 config/name="Juicy Shooter"
 run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://Sprites/icon.png"
 
 [display]
 
@@ -73,6 +83,12 @@ click={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Bullet"
+2d_physics/layer_3="Obstacle"
 
 [physics]
 
