@@ -2,12 +2,17 @@ extends KinematicBody2D
 
 export(float) var speed  # speed in pixels/sec
 export(float) var BulletTravelSpeed
+export(float) var accuracy = 1 
+export(float) var maxBoost = 3
+onready var currentAccuracy = accuracy
 var rotation_speed = 2
+onready var boostPower = maxBoost
 var velocity = Vector2.ZERO
 #var bullet = preload("res://Bullet.tscn")
 var bullet = preload("res://Props/IncendiaryRound.tscn")
 const BULLET_SPEED = 10
 var ExplosionParticles = preload("res://Scripts/ExplosionParticles.gd")
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	# Sets tank base distance
@@ -24,8 +29,31 @@ func get_input(delta):
 		rot_dir -= 1
 	rotation += rotation_speed * rot_dir * delta
 	velocity = Vector2()
+
 	if Input.is_action_pressed("ui_up"):
-		velocity = Vector2(speed, 0).rotated(rotation)
+		if Input.is_action_pressed("Boost"):
+			if boostPower >= 0:
+				$TankBody/RegularFire.visible = false
+				$TankBody/BoostAnimator.visible = true
+				$TankBody/BoostAnimator.play("Boost")
+				currentAccuracy = accuracy * 0.8
+				velocity = Vector2(speed+100, 0).rotated(rotation)
+				boostPower -= delta
+				$"../CanvasLayer/ProgressBar".value = boostPower * 33.33 
+			else:
+				$TankBody/RegularFire.visible = true
+				$TankBody/BoostAnimator.visible = false
+				$TankBody/BoostAnimator.stop()
+				currentAccuracy = accuracy
+				velocity = Vector2(speed, 0).rotated(rotation)
+		else:
+			$TankBody/RegularFire.visible = true
+			$TankBody/BoostAnimator.visible = false
+			$TankBody/BoostAnimator.stop()
+			boostPower = min(maxBoost, boostPower + 0.5 * delta)
+			$"../CanvasLayer/ProgressBar".value = boostPower * 33.33 
+			currentAccuracy = accuracy
+			velocity = Vector2(speed, 0).rotated(rotation)
 	if Input.is_action_pressed("ui_down"):
 		velocity = Vector2(-speed/2, 0).rotated(rotation)
 
@@ -88,10 +116,12 @@ func OnImpact():
 
 func shoot():
 	if Input.is_action_just_pressed("shoot"):
+		rng.randomize()
 		var bullet_instance = bullet.instance()
 		bullet_instance.connect("impacted", self, "OnImpact")
 		bullet_instance.global_position = $Node2D/TankHead/Muzzle.global_position
 		bullet_instance.look_at($Node2D/TankHead/Sprite/CrosshairPosition.global_position)
+		bullet_instance.rotate(deg2rad(rng.randi_range(-10 * (1-currentAccuracy), 10 * (1-currentAccuracy))))
 		get_tree().get_root().add_child(bullet_instance)
 		match $Node2D/TankHead.frame:
 			0:
